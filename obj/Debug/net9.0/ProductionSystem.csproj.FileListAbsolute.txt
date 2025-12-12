@@ -1,0 +1,14 @@
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\bin\Debug\net9.0\ProductionSystem.exe
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\bin\Debug\net9.0\ProductionSystem.deps.json
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\bin\Debug\net9.0\ProductionSystem.runtimeconfig.json
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\bin\Debug\net9.0\ProductionSystem.dll
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\bin\Debug\net9.0\ProductionSystem.pdb
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ProductionSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ProductionSystem.AssemblyInfoInputs.cache
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ProductionSystem.AssemblyInfo.cs
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ProductionSystem.csproj.CoreCompileInputs.cache
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ProductionSystem.dll
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\refint\ProductionSystem.dll
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ProductionSystem.pdb
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ProductionSystem.genruntimeconfig.cache
+C:\Users\PC\Documents\Francisco\Dev\C#\13. Studies\4. ProductionSystem\ProductionSystem\obj\Debug\net9.0\ref\ProductionSystem.dll
