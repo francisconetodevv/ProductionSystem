@@ -10,12 +10,13 @@ namespace ProductionSystem.Data
     {
         // This class has the objetive to save the connection string with the database
         // And stablish the connection into the database
-        private static readonly string ConnectionString = "Server=DESKTOP-1H81HKV\\DBDEVELOPER;Database=ControleProducaoDB;Integrated Security=True;TrustServerCertificate=True;";
+        // To use this class it is necessary to instantiate SqlConnection
+        private static readonly string ConnectionString = "Server=DESKTOP-1H81HKV\\DBDEVELOPER;Database=ProductionControlDB;Integrated Security=True;TrustServerCertificate=True;";
 
-        public static SqlConnection GetConnection(string queryString, string connectionString)
+        public static SqlConnection GetConnection()
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
-            
+
             connection.Open();
             
             return connection;
