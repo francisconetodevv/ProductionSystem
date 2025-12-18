@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProductionSystem.Models
 {
-    public class SystemLogs
+    public class SystemLog
     {
         public int LogId { get; set; }
         public DateTime DateTimeActual { get; set; }

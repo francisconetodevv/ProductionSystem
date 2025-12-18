@@ -9,7 +9,7 @@ namespace ProductionSystem.Models
     {
         public int ProductionOrderId { get; set; }
         public string OrderNumber { get; set; }
-        public Product ProductId { get; set; }
+        public int ProductId { get; set; }
         public decimal QuantityToProduce { get; set; }
         public DateTime CreationDate { get; set; }
         public string OrderStatus { get; set; }
