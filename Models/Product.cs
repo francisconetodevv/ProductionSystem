@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace ProductionSystem.Models
 {
-    public class RawMaterial
+    public class Product
     {
-        public int RawMaterialId { get; set; }
+        public int ProductId { get; set; }
         public string Code { get; set; }
-        public string RawMaterialName { get; set; }
-        public decimal StockQuantity { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDescription { get; set; }
         public string UOM { get; set; }
 
     }
