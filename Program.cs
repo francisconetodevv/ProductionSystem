@@ -14,9 +14,9 @@ try
         }
 
         Product product = new Product{
-            Code = "PROD-004",
+            Code = "PROD-005",
             ProductName = "Mesa Escritório",
-            ProductDescription = "Mesa de Escritório Premium",
+            ProductDescription = "Mesa de Escritório Basic",
             UOM = "UN"
         };
 
@@ -40,7 +40,7 @@ try
         {
             Console.WriteLine("Product three found it!");
             Console.WriteLine($"ID: {productThree.ProductId}");
-            Console.WriteLine($"Code: {productThree.ProductName}");
+            Console.WriteLine($"Code: {productThree.Code}");
             Console.WriteLine($"Name: {productThree.ProductName}");
             Console.WriteLine($"Description: {productThree.ProductDescription}");
             Console.WriteLine($"UOM: {productThree.UOM}");
@@ -48,8 +48,24 @@ try
         {
             Console.WriteLine("Produto não encontrado!");
         }
-        
 
+        Product productFour = new Product{
+            ProductId = 3,
+            Code = "PROD-005",
+            ProductName = "Mesa Escritório",
+            ProductDescription = "Mesa de Escritório Basic",
+            UOM = "UN"
+        };
+
+        productRepository.UpdateProduct(productFour);
+
+        List<Product> productsFive = productRepository.GetAllProducts();
+
+        foreach(var value in productsFive)
+        {
+            Console.WriteLine($"ID: {value.ProductId} | Code: {value.Code} | Name: {value.ProductName}");
+        }
+        
     }
 
     Console.WriteLine("Connection closed");

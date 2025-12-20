@@ -94,5 +94,23 @@ namespace ProductionSystem.Repositories
             }
 
         }
+
+        public void UpdateProduct(Product product)
+        {
+            using(SqlConnection connection = DatabaseConnection.GetConnection())
+            {
+                string query = "UPDATE Products SET ProductName = @ProductName, Code = @Code, ProductDescription = @ProductDescription, UOM = @UOM WHERE ProductId = @ProductId";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                
+                command.Parameters.AddWithValue("@ProductName", product.ProductName);
+                command.Parameters.AddWithValue("@Code", product.Code);
+                command.Parameters.AddWithValue("@ProductDescription", product.ProductDescription);
+                command.Parameters.AddWithValue("@UOM", product.UOM);
+                command.Parameters.AddWithValue("@ProductId", product.ProductId);
+
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
