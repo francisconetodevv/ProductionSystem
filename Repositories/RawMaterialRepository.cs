@@ -19,9 +19,9 @@ namespace ProductionSystem.Repositories
                 SqlCommand command = new SqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@Code", rawMaterial.Code);
-                command.Parameters.AddWithValue("@Code", rawMaterial.RawMaterialName);
-                command.Parameters.AddWithValue("@Code", rawMaterial.StockQuantity);
-                command.Parameters.AddWithValue("@Code", rawMaterial.UOM);
+                command.Parameters.AddWithValue("@RawMaterialName", rawMaterial.RawMaterialName);
+                command.Parameters.AddWithValue("@StockQuantity", rawMaterial.StockQuantity);
+                command.Parameters.AddWithValue("@UOM", rawMaterial.UOM);
 
                 command.ExecuteNonQuery();
             }
@@ -71,9 +71,10 @@ namespace ProductionSystem.Repositories
                 {
                     RawMaterial rawMaterial = new RawMaterial
                     {
-                      RawMaterialId = (int)reader["rawMaterialId"],
+                      RawMaterialId = (int)reader["RawMaterialId"],
                       Code = reader["Code"].ToString(),
                       RawMaterialName = reader["RawMaterialName"].ToString(),
+                      StockQuantity = (decimal)reader["StockQuantity"],
                       UOM = reader["UOM"].ToString()
                     };
 
@@ -89,10 +90,17 @@ namespace ProductionSystem.Repositories
         {
             using (SqlConnection connection = DatabaseConnection.GetConnection())
             {
-                string query = "";
+                string query = "UPDATE RawMaterial SET RawMaterialName = @RawMaterialName, Code = @Code, StockQuantity = @StockQuantity, UOM = @UOM WHERE RawMaterialId = @RawMaterialId";
 
                 SqlCommand command = new SqlCommand(query, connection);
+                          
+                command.Parameters.AddWithValue("@RawMaterialId", rawMaterial.RawMaterialId);
+                command.Parameters.AddWithValue("@RawMaterialName", rawMaterial.RawMaterialName);
+                command.Parameters.AddWithValue("@Code", rawMaterial.Code);
+                command.Parameters.AddWithValue("@StockQuantity", rawMaterial.StockQuantity);
+                command.Parameters.AddWithValue("@UOM", rawMaterial.UOM);
 
+                command.ExecuteNonQuery();
 
             }
         }
@@ -101,10 +109,13 @@ namespace ProductionSystem.Repositories
         {
             using (SqlConnection connection = DatabaseConnection.GetConnection())
             {
-                string query = "";
+                string query = "DELETE FROM RawMaterial WHERE RawMaterialId = @RawMaterialId";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
+                command.Parameters.AddWithValue("@RawMaterialId", rawMaterialId);
+
+                command.ExecuteNonQuery();
 
             }
         }
