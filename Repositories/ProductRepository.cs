@@ -10,6 +10,8 @@ namespace ProductionSystem.Repositories
 {
     public class ProductRepository
     {
+        // Comparing with HTTPS Methods - CRUD:
+        // 1. CREATE
         public void InsertProduct(Product product)
         {
             // 1. First open the connection database 
@@ -34,6 +36,7 @@ namespace ProductionSystem.Repositories
 
         }
 
+        // 2.1. READ (All)
         public List<Product> GetAllProducts()
         {
             List<Product> products = new List<Product>();
@@ -64,6 +67,8 @@ namespace ProductionSystem.Repositories
             return products;
         }
 
+
+        // 2.2. READ (ById)
         public Product GetProductById(int productId)
         {
             using (SqlConnection connection = DatabaseConnection.GetConnection())
@@ -95,6 +100,7 @@ namespace ProductionSystem.Repositories
 
         }
 
+        // 3. UPDATE
         public void UpdateProduct(Product product)
         {
             using(SqlConnection connection = DatabaseConnection.GetConnection())
@@ -108,6 +114,21 @@ namespace ProductionSystem.Repositories
                 command.Parameters.AddWithValue("@ProductDescription", product.ProductDescription);
                 command.Parameters.AddWithValue("@UOM", product.UOM);
                 command.Parameters.AddWithValue("@ProductId", product.ProductId);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        //4. DELETE 
+        public void DeleteProduct(int productId)
+        {
+            using(SqlConnection connection = DatabaseConnection.GetConnection())
+            {
+                string query = "DELETE FROM Products WHERE ProductId = @ProductId";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@ProductId", productId);
 
                 command.ExecuteNonQuery();
             }
