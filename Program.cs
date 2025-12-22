@@ -13,6 +13,29 @@ try
             Console.WriteLine("Connection established with success!");
         }
         
+
+        RawMaterialRepository rawMaterialRepo = new RawMaterialRepository();
+
+        // 1. Testing - Insert
+        RawMaterial rawMaterial = new RawMaterial
+        {
+          Code = "MP-001",
+          RawMaterialName = "Madeira MDF",
+          StockQuantity = 150.0m,
+          UOM = "M2"
+        };
+
+        rawMaterialRepo.InsertRawMaterial(rawMaterial);
+
+
+        // 2. Testing - Read all
+        rawMaterialRepo.GetAllRawMaterial();
+
+        // 3. Testing - Read by Id
+        rawMaterialRepo.GetRawMaterialById(1);
+
+        // 4.Testing
+        
     }
 
     Console.WriteLine("Connection closed");
