@@ -7,12 +7,12 @@ namespace ProductionSystem.BusinessRule
 {
     public class StockValidationResult
     {
-        public bool Passed { get; set; }
-        public List<InsufficientStockItem> InsufficientStockItemsList { get; set; }
+        public bool IsValid { get; set; }
+        public List<InsufficientStockItem> InsufficientItems { get; set; }
 
         public StockValidationResult()
         {
-            InsufficientStockItemsList = new List<InsufficientStockItem>();
+            InsufficientItems = new List<InsufficientStockItem>();
         }
     }
 }

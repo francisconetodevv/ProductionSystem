@@ -13,7 +13,36 @@ namespace ProductionSystem.BusinessRule
 
         public StockValidationResult CheckStock(List<ProductionOrderRawMaterials> materials)
         {
-            throw new NotImplementedException();
+            StockValidationResult stockValidationResult = new StockValidationResult();
+
+            foreach (var material in materials)
+            {
+                var rawMaterial = _rawMaterialRepository.GetRawMaterialById(material.RawMaterialId);
+
+                if (rawMaterial.StockQuantity < material.ConsumedQuantity)
+                {
+                    InsufficientStockItem insufficientStockItem = new InsufficientStockItem
+                    {
+                        RawMaterialName = rawMaterial.RawMaterialName,
+                        CurrentStock = rawMaterial.StockQuantity,
+                        RequiredQuantity = material.ConsumedQuantity
+                    };
+
+                    stockValidationResult.InsufficientItems.Add(insufficientStockItem);
+
+                }
+            }
+
+            if (stockValidationResult.InsufficientItems.Count == 0)
+            {
+                stockValidationResult.IsValid = true;
+            }
+            else
+            {
+                stockValidationResult.IsValid = false;
+            }
+
+            return stockValidationResult;
         }
     }
 }
