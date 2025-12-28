@@ -7,7 +7,7 @@ namespace ProductionSystem.Models
 {
     public class ProductionOrderRawMaterials
     {
-        public int ProductionOrderRawMaterialsId { get; set; }
+        public int ProductionOrderId { get; set; }
         public int RawMaterialId { get; set; }
         public decimal ConsumedQuantity { get; set; }
     }

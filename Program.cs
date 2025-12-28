@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Microsoft.Data.SqlClient;
+using ProductionSystem.BusinessRule;
 using ProductionSystem.Data;
 using ProductionSystem.Models;
 using ProductionSystem.Repositories;
@@ -14,56 +15,61 @@ try
         }
     }
 
-    RawMaterialRepository repo = new RawMaterialRepository();
+    StockValidator validator = new StockValidator();
 
-    // 1. Insert
-    RawMaterial mp = new RawMaterial
+    // Cenário de Estoque válido:
+    Console.WriteLine("--- CENÁRIO 1: Estoque Suficiente ---");
+
+    List<ProductionOrderRawMaterials> testSuccess = new List<ProductionOrderRawMaterials>()
     {
-        Code = "MP-002",
-        RawMaterialName = "Madeira Arueira",
-        StockQuantity = 150.0m,
-        UOM = "M2"
+      new ProductionOrderRawMaterials
+      {
+            RawMaterialId = 4,
+            ConsumedQuantity = 50
+      }
     };
-    repo.InsertRawMaterial(mp);
-    Console.WriteLine("✅ Material inserido!\n");
 
-    // 2. GetAll
-    var materials = repo.GetAllRawMaterial();
-    Console.WriteLine($"📦 Total de materiais: {materials.Count}");
-    foreach(var m in materials)
+    StockValidationResult resultSuccess = validator.CheckStock(testSuccess);
+    Console.WriteLine($"Validação: {(resultSuccess.IsValid ? "Aprovado" : "Reprovado")}");
+    Console.WriteLine($"Problemas encontrados: {resultSuccess.InsufficientItems.Count}");
+
+    Console.Clear();
+
+    // Cenário de Estoque Inválido
+    Console.WriteLine("--- CENÁRIO 2: Estoque Insuficiente ---");
+    List<ProductionOrderRawMaterials> testFail = new List<ProductionOrderRawMaterials>()
     {
-        Console.WriteLine($"  - {m.RawMaterialName}: {m.StockQuantity} {m.UOM}");
+        new ProductionOrderRawMaterials
+        {
+            RawMaterialId = 6,
+            ConsumedQuantity = 50
+        },
+
+        new ProductionOrderRawMaterials
+        {
+            RawMaterialId = 8,
+            ConsumedQuantity = 30
+        }
+    };
+
+    StockValidationResult resultFail = validator.CheckStock(testFail);
+    Console.WriteLine($"Validação: {(resultFail.IsValid ? "Aprovado" : "Reprovado")}");
+    Console.WriteLine($"Problemas encontrados: {resultFail.InsufficientItems.Count}");
+
+    if (!resultFail.IsValid)
+    {
+        Console.WriteLine("\nDetalhes dos problemas: ");
+        foreach (var item in resultFail.InsufficientItems)
+        {
+            Console.WriteLine($"  • {item.RawMaterialName}:");
+            Console.WriteLine($"    - Estoque atual: {item.CurrentStock}");
+            Console.WriteLine($"    - Quantidade necessária: {item.RequiredQuantity}");
+            Console.WriteLine($"    - Faltam: {item.RequiredQuantity - item.CurrentStock}\n");
+        }
     }
 
-    // 3. GetById
-    var found = repo.GetRawMaterialById(2);
-    if(found != null)
-    {
-        Console.WriteLine($"\n🔍 Encontrado: {found.RawMaterialName}");
-    }
+    Console.WriteLine("========== FIM DO TESTE ==========\n");
 
-    // 4. Update
-    found.StockQuantity = 200.0m;
-    found.RawMaterialName = "Madeira MDF Premium";
-    repo.UpdateRawMaterial(found);
-    Console.WriteLine($"✏️ Material atualizado!\n");
-
-    // Listar novamente para ver mudança
-    materials = repo.GetAllRawMaterial();
-    Console.WriteLine($"📦 Após update:");
-    foreach(var m in materials)
-    {
-        Console.WriteLine($"  - {m.RawMaterialName}: {m.StockQuantity} {m.UOM}");
-    }
-
-    // 5. Delete
-    repo.DeleteRawMaterial(2);
-    Console.WriteLine($"\n🗑️ Material deletado!");
-
-    materials = repo.GetAllRawMaterial();
-    Console.WriteLine($"📦 Total após delete: {materials.Count}");
-
-    Console.WriteLine("\n✅ Todos os testes concluídos!");
 }
 catch (Exception ex)
 {
